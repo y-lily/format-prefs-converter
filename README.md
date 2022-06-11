@@ -1,4 +1,4 @@
-# Java Eclipse formatting pres converter
+# Java Eclipse formatting prefs converter
 ### What does it do
 This tool converts *org.eclipse.jdt.core.prefs* to XML format. 
 
