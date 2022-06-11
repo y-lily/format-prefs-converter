@@ -1,40 +1,22 @@
-package test;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import converter.Converter;
+import main.java.converter.Converter;
 
 
 public class ConverterTest {
 
     private Converter converter;
 
-    private final String inputFileName = "org.eclipse.jdt.core.prefs";
-    private final String outputFileName = "eclipse-java-style.xml";
-
 
     @Before
-    public void initialize() throws IOException {
-
-        try (
-                FileReader fileReader = new FileReader(inputFileName);
-                BufferedReader reader = new BufferedReader(fileReader);
-                FileWriter fileWriter = new FileWriter(outputFileName);
-                BufferedWriter writer = new BufferedWriter(fileWriter)) {
-
-            converter = new Converter(reader, writer);
-        }
-    }
+    public void initialize() { converter = new Converter(null, null); }
 
 
     @Test

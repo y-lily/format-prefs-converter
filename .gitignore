@@ -1,0 +1,5 @@
+lib/*
+.vscode/*
+*.class
+*.jar
+*.json

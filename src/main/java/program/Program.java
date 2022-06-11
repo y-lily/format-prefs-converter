@@ -1,15 +1,21 @@
+package main.java.program;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import converter.Converter;
+import main.java.converter.Converter;
 
 
 public class Program {
 
     public static void main(String[] args) throws IOException {
+
+        String profileName = "my-profile";
+
+        if (args.length > 1) { profileName = args[1]; }
 
         String inputFileName = "org.eclipse.jdt.core.prefs";
         String outputFileName = "eclipse-java-style.xml";
@@ -23,8 +29,7 @@ public class Program {
                 BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
             Converter converter = new Converter(reader, writer);
-            converter.toXML();
-
+            converter.toXML(profileName);
         }
     }
 }

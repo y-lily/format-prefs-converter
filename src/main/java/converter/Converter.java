@@ -1,4 +1,4 @@
-package converter;
+package main.java.converter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,10 +20,18 @@ public class Converter {
     }
 
 
-    public void toXML() throws IOException {
+    public void toXML(String profileName) throws IOException {
 
-        writer.write(defaultFirstLine);
-        writer.newLine();
+        writer.write(defaultFirstLine + "\n");
+
+
+        String profileOpenLine = "profile kind="
+                + wrapped("CodeFormatterProfile", "\"");
+        profileOpenLine += " name=" + wrapped(profileName, "\"");
+        profileOpenLine = wrapped(profileOpenLine, "<", ">");
+
+        writer.write(profileOpenLine + "\n");
+
 
         String line = "";
 
@@ -33,9 +41,11 @@ public class Converter {
 
             line = lineToXML(line);
 
-            writer.write(line);
-            writer.newLine();
+            writer.write(line + "\n");
         }
+
+        String profileCloseLine = "</profile>";
+        writer.write(profileCloseLine + "\n");
     }
 
 
@@ -45,20 +55,20 @@ public class Converter {
 
         var parts = line.split("=", 2);
         line = "setting id=";
-        line += framed(parts[0], "\"");
+        line += wrapped(parts[0], "\"");
         line += " value=";
-        line += framed(parts[1], "\"");
+        line += wrapped(parts[1], "\"");
 
-        return framed(line, "<", "/>");
+        return wrapped(line, "<", "/>");
     }
 
 
-    private String framed(String line, String left, String right) {
+    private String wrapped(String line, String left, String right) {
         return left + line + right;
     }
 
 
-    private String framed(String line, String frame) {
-        return framed(line, frame, frame);
+    private String wrapped(String line, String wrap) {
+        return wrapped(line, wrap, wrap);
     }
 }
